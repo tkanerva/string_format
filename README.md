@@ -7,7 +7,8 @@
 gleam add string_format
 ```
 ```gleam
-import string_format
+import gleam/io
+import string_format.{end, f, format}
 
 pub fn main() {
   let fibo_list = [1, 1, 2, 3, 5, 8]
