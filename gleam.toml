@@ -1,0 +1,11 @@
+name = "string_format"
+version = "1.0.0"
+description = "A string formatter library inspired by Python's .format() method"
+licences = ["Apache-2.0"]
+repository = { type = "github", user = "tkanerva", repo = "string_format" }
+
+[dependencies]
+gleam_stdlib = ">= 0.34.0 and < 2.0.0"
+
+[dev-dependencies]
+gleeunit = ">= 1.0.0 and < 2.0.0"
