@@ -10,7 +10,15 @@ gleam add string_format
 import string_format
 
 pub fn main() {
-  // TODO: An example of the project in use
+  let fibo_list = [1, 1, 2, 3, 5, 8]
+
+  let mystr =
+    format("PI is {} and the First fibonacci numbers are: {}")
+    |> f(3.14)
+    |> f(fibo_list)
+    |> end()
+
+  io.println(mystr)
 }
 ```
 
