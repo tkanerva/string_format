@@ -6,6 +6,26 @@ pub fn main() {
   gleeunit.main()
 }
 
+pub fn format_bool_test() {
+  let value = True
+  let str1 =
+    format("boolean is: {}")
+    |> f(value)
+    |> end()
+
+  str1 |> should.equal("boolean is: True")
+}
+
+pub fn format_bitarray_test() {
+  let barray = <<1:size(32), 2, 42>>
+  let str1 =
+    format("bitarray is: {}")
+    |> f(barray)
+    |> end()
+
+  str1 |> should.equal("bitarray is: 1 2 ")
+}
+
 pub fn format_list_of_ints_test() {
   let lst = [1,2,4,8,16]
   let str1 =
