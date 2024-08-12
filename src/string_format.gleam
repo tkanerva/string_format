@@ -4,11 +4,30 @@ import gleam/int
 import gleam/iterator
 import gleam/list
 import gleam/string
+import gleam/bit_array
+import gleam/bool
 
 fn cvt(val, dynvalue, detectfun, convertfun) {
   case detectfun(dynvalue) {
     Ok(x) -> convertfun(x)
     Error(_) -> val
+  }
+}
+
+fn bitarray_to_str(input) {
+  let output =
+    input
+    |> bitarr_loop([])
+    |> list.reverse
+    |> string.join(", ")
+  "<<" <> output <> ">>"
+}
+
+fn bitarr_loop(input: BitArray, acc: List(String)) {
+  case input {
+    <<head:8>> -> [int.to_string(head), ..acc]
+    <<head:8, rest:bits>> -> bitarr_loop(rest, [int.to_string(head), ..acc])
+    _ -> [""]
   }
 }
 
@@ -21,6 +40,8 @@ fn to_string(val) {
   }
   let dyn = dynamic.from(val)
   "?"
+  |> cvt(dyn, dynamic.bit_array, bitarray_to_str)
+  |> cvt(dyn, dynamic.bool, bool.to_string)
   |> cvt(dyn, dynamic.int, int.to_string)
   |> cvt(dyn, dynamic.float, float.to_string)
   |> cvt(dyn, dynamic.list(of: dynamic.int), inthelper)
